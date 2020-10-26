@@ -1,0 +1,37 @@
+class Solution {
+public:
+    bool hasGroupsSizeX(vector<int>& deck) {
+        unordered_map<int,int> m;
+        int pos=0;
+        for(int i : deck)
+        {
+            if(m.find(i)==m.end())
+                m[i]=1;
+            else
+                m[i]++;
+            pos++;
+        }
+        int mi=INT_MAX;
+        
+        for(auto i:m)
+        {
+            if(mi>i.second)
+                mi=i.second;
+        }
+        auto v=m.begin();
+        int gcd=__gcd(v->second,mi);
+        
+        
+        for(auto i:m)
+        {
+            gcd=__gcd(i.second,gcd);
+            
+            
+        }
+        if(gcd>=2)
+            return true;
+        else
+            return false;
+        
+    }
+};
